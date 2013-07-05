@@ -9,5 +9,17 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
+ *= require bootstrap.css
+ *= require bootstrap-responsive.css
+ *= require font-awesome.css
+ *= require style-metro.css
+ *= require style.css
+ *= require style-responsive.css
+ *= require default.css
+ *= require uniform.default.css
+ *= require jquery.gritter.css
+ *= require daterangepicker.css
+ *= require fullcalendar.css
+ *= require jqvmap.css
+ *= require jquery.easy-pie-chart.css
  */

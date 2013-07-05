@@ -12,5 +12,30 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
-//= require_tree .
+//= require jquery-migrate-1.2.1.min
+//= require jquery-ui-1.10.1.custom.min
+//= require bootstrap.min
+//= require jquery.slimscroll.min
+//= require jquery.blockui.min
+//= require jquery.cookie.min
+//= require jquery.uniform.min
+//= require jquery.vmap
+//= require jquery.vmap.russia
+//= require jquery.vmap.world
+//= require jquery.vmap.europe
+//= require jquery.vmap.germany
+//= require jquery.vmap.usa
+//= require jquery.vmap.sampledata
+//= require jquery.flot.min
+//= require jquery.flot.resize.min
+//= require jquery.pulsate.min
+//= require date
+//= require daterangepicker
+//= require jquery.gritter
+//= require fullcalendar.min
+//= require jquery.easy-pie-chart
+//= require jquery.sparkline.min
+//= require app
+//= require index
+
+
