@@ -1,2 +1,50 @@
-%h1 Welcome#index
-%p Find me in app/views/welcome/index.html.haml
+.pull-right
+  %strong
+    ULTIMA ACTUALIZACION: xx/xx/xx
+%BR
+%div{class: 'alert alert-block alert-success'}
+  En este momento todo esta tranquilo cerca de tu ubicación. Relajate.
+
+%h5
+  Detalle
+
+%table{class: 'table'}
+  %tr
+    %td Río
+    %td
+  %tr
+    %td Puerto
+    %td
+  %tr
+    %td Altura actual
+    %td
+  %tr
+    %td Altura Anterior
+    %td
+  %tr{class: 'alert'}
+    %td Medida Alerta
+    %td
+  %tr{class: 'alert-error'}
+    %td Medida Evacuación
+    %td
+
+
+%h5 Históricos
+%ul{class: 'nav nav-tabs'}
+  %li{class: 'active'}
+    %a{href: '#semana',"data-toggle"=>'tab'}
+      Ultima Semana
+  %li
+    %a{href: '#mes',"data-toggle"=>'tab'}
+      Ultimo Mes
+
+
+
+.tab-content
+  #semana{class: "tab-pane active"}
+    Datos de la semana
+  #mes{class: "tab-pane"}
+    Datos del mes
+
+
+
