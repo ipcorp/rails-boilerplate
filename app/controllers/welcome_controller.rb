@@ -1,11 +1,15 @@
 class WelcomeController < ApplicationController
   def index
-  	@rio = Rio.find(2)
-    @puerto = @rio.puertos.find(13)
-    @altura = @puerto.alturas.ultima
 
-    @semana = @puerto.alturas.semana
+  	@puerto = Puerto.where("nombre ilike ?", request.subdomain).first
 
+    if @puerto
+      @rio    = @puerto.rio
+      @altura = @puerto.ultima_altura
+      @semana = @puerto.ultima_semana
+    else
+      render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found
+    end
 
   end
 
