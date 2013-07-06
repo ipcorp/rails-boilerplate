@@ -3,4 +3,7 @@ class Puerto < ActiveRecord::Base
 
   has_many   :alturas
   belongs_to :rio
+
+  delegate :nombre, to: :rio, prefix: true
+
 end
