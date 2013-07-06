@@ -9,5 +9,7 @@ RailsBoilerplate::Application.routes.draw do
   root :to => 'welcome#index'
 
   get "api/rios/alturas_por_ciudad"
-
+  get "api/rios/index"
+  get "api/rios/rio"
+  get "api/rios/puerto"
 end
