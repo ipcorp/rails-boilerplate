@@ -10,17 +10,10 @@ class WelcomeController < ApplicationController
   end
 
 
-  def alturas_por_ciudad
-    @puerto = Puerto.find_by_nombre(params[:ciudad])
-
+  def prueba_widget
     respond_to do |format|
-      format.json
+      format.html{render :layout=>false}
     end
   end
-
-
-
-
-
 
 end
