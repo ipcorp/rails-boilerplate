@@ -2,6 +2,11 @@ class Altura < ActiveRecord::Base
   attr_accessible :fecha, :medicion, :puerto_id
   belongs_to :puerto
 
+  scope :por_fecha, order('fecha DESC')
+
+  scope :semana, por_fecha.first(7)
+
+
   def todo_ok?
   	true if puerto.altura_alerta > medicion
   end
@@ -22,10 +27,16 @@ class Altura < ActiveRecord::Base
     (medicion - puerto.altura_evacuacion).round(2)
   end
 
+  def self.ultima
+    por_fecha.first
+  end
+
+
+
 
   def actualizacion
   	unless fecha.blank?
-  	  fecha.strftime("%d/%m/%Y")
+  	  fecha.strftime("%d/%m/%Y %H:%M:%S")
     else
       "-"
     end

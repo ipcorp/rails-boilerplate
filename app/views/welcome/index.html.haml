@@ -59,7 +59,7 @@
 %ul{class: 'nav nav-tabs'}
   %li{class: 'active'}
     %a{href: '#semana',"data-toggle"=>'tab'}
-      Ultima Semana
+      Ultimas 7 mediciones
   %li
     %a{href: '#mes',"data-toggle"=>'tab'}
       Ultimo Mes
@@ -68,9 +68,23 @@
 
 .tab-content
   #semana{class: "tab-pane active"}
-    Datos de la semana
+    %table{class: 'table span4'}
+      %tr
+        %th Fecha
+        %th Medición (Mts.)
+        %th Variación (Mts.)
+        %th i
+      - @semana.each_with_index do |sem, i|
+        %tr
+          %td= sem.actualizacion
+          %td= sem.medicion
+          - variacion = sem.medicion - @semana[i-1].medicion
+          %td= variacion.round(2)
+          %td= i 
+
+
   #mes{class: "tab-pane"}
-    Datos del mes
+    No se encontraron datos del mes
 
 
 
