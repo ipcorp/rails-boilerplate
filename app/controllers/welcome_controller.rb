@@ -5,6 +5,7 @@ class WelcomeController < ApplicationController
   	if @puerto.blank?
       @puerto = Puerto.where("nombre ilike ?", request.subdomain).first
     end
+
     if @puerto
       @rio    = @puerto.rio
       @altura = @puerto.ultima_altura
