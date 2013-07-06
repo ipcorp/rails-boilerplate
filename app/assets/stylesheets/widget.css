@@ -17,3 +17,45 @@ div.info_rio{
   margin-bottom: 0px; 
   margin-top: 0px;
 }
+
+.evacuacion {
+  background-color: #F2DEDE;
+  border-color: #EED3D7;
+  color: #B94A48;
+  
+  width:130px;
+  height:20px;
+  border:1px solid #B94A48;
+  margin:0px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.alerta {
+  background-color: #FCF8E3;
+  border-color: #FBEED5;
+  color: #C09853;
+  
+  width:130px;
+  height:20px;
+  border:1px solid #FBEED5;
+  margin:0px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.ok {
+  background-color: #DFF0D8;
+  border-color: #D6E9C6;
+  color: #468847;
+  
+  width:130px;
+  height:20px;
+  border:1px solid #D6E9C6;
+  margin:0px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}

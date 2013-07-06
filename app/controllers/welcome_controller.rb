@@ -12,7 +12,7 @@ class WelcomeController < ApplicationController
 
   def prueba_widget
     respond_to do |format|
-      format.html{render :layout=>false}
+      format.html#{render :layout=>false}
     end
   end
 

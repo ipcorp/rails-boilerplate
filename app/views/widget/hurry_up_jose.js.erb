@@ -66,15 +66,27 @@ function main() {
                 .done(
                     function(datos) {
                         var obj=datos;
+                        var estado=null;
+                        var imagen = null;
+                        if(obj.puerto.altura.medicion >  obj.puerto.altura_evacuacion){
+                            estado = "evacuacion";
+                        }else if(obj.puerto.altura.medicion >  obj.puerto.altura_alerta){
+                            estado = "alerta"
+                        }else{
+                            estado = "ok"
+                        }
                         var $div = $("<div>", {id: "info_rio", class: "info_rio"});
                         var $div_titulo = $("<div>", {id: "info_rio_titulo", class: "info_rio_titulo"});
                         var $div_altura = $("<div>", {id: "info_rio_altura", class: "info_rio_altura"});
+                        var $div_info = $("<div>", {id: "info_rio_info", class: estado});
                         $div_titulo.append("<b>Puerto:</b> "+obj.puerto.nombre+"<br />");
                         $div_titulo.append("<b>Río:</b> "+obj.puerto.rio_nombre);
                         $div_altura.append("<b>Alt. Alerta:</b> "+obj.puerto.altura_alerta+"<br />");
                         $div_altura.append("<b>Alt. Evacuación:</b> "+obj.puerto.altura_evacuacion+"<br />");
-                        // $div_altura.append("<b>coordenadas:</b> "+ latitud+"," + longitud)
+                        $div_altura.append("<b>Alt. Actual:</b> "+obj.puerto.altura.medicion+"<br />");
+                        $div_info.append('<img width="16" src="/assets/'+estado+'.png" alt="">'+estado.toUpperCase())
 
+                        $div.append($div_info);
                         $div.append($div_titulo);
                         $div.append($div_altura);
 
