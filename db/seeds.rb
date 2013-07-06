@@ -93,7 +93,7 @@ datos.split("\n").each do |linea|
   puerto.save
 end
 
-datos_alturas = %w{
+datos_alturas = %{
 CORRIENTES|06/07/2013 12:00:00 p.m.|7,18
 CORRIENTES|06/07/2013 09:00:00 a.m.|7,19
 CORRIENTES|06/07/2013 06:00:00 a.m.|7,22
@@ -854,23 +854,6 @@ CORRIENTES|08/07/2012 12:00:00 p.m.|4,74
 CORRIENTES|08/07/2012 12:00:00 a.m.|4,76
 CORRIENTES|07/07/2012 12:00:00 p.m.|4,80
 CORRIENTES|07/07/2012 12:00:00 a.m.|4,85
-}
-
-datos_alturas.split("\n").each do |altura|
-  nombre, fecha, dato_altura = altura.split("|")
-  puerto = Puerto.where(nombre: nombre).first
-  if puerto
-    if dato_altura
-      dato_altura = dato_altura.gsub(",", ".").to_f
-      fecha = DateTime.strptime(fecha, '%d/%m/%Y %I:%M:%S %p')
-      Altura.create(puerto_id: puerto.id, 
-                    medicion: dato_altura,
-                    fecha: fecha)
-    end
-  end
-end
-
-alturas_andresito = %{
 ANDRESITO|06/07/2013 12:00:00 p.m.|3,16
 ANDRESITO|06/07/2013 12:00:00 a.m.|3,16
 ANDRESITO|05/07/2013 12:00:00 p.m.|3,32
@@ -885,9 +868,6 @@ ANDRESITO|01/07/2013 12:00:00 p.m.|4,6
 ANDRESITO|01/07/2013 12:00:00 a.m.|5,2
 ANDRESITO|30/06/2013 12:00:00 p.m.|5,04
 ANDRESITO|30/06/2013 12:00:00 a.m.|4,88
-}
-
-alturas_paso = %{
 PASO DE LA PATRIA|06/07/2013 03:00:00 p.m.|7,47
 PASO DE LA PATRIA|06/07/2013 12:00:00 p.m.|7,47
 PASO DE LA PATRIA|06/07/2013 09:00:00 a.m.|7,49
@@ -944,9 +924,6 @@ PASO DE LA PATRIA|30/06/2013 03:00:00 a.m.|7,2
 PASO DE LA PATRIA|30/06/2013 12:00:00 a.m.|7,16
 PASO DE LA PATRIA|29/06/2013 09:00:00 p.m.|7,14
 PASO DE LA PATRIA|29/06/2013 06:00:00 p.m.|7,08
-}
-
-alturas_barranquera = %{
 BARRANQUERAS|06/07/2013 12:00:00 p.m.|7,03
 BARRANQUERAS|06/07/2013 09:00:00 a.m.|7,04
 BARRANQUERAS|06/07/2013 06:00:00 a.m.|7,04
@@ -1000,9 +977,6 @@ BARRANQUERAS|30/06/2013 09:00:00 a.m.|6,7
 BARRANQUERAS|30/06/2013 06:00:00 a.m.|6,66
 BARRANQUERAS|30/06/2013 03:00:00 a.m.|6,63
 BARRANQUERAS|30/06/2013 12:00:00 a.m.|6,61
-}
-
-alturas_itati = %{
 ITATI|06/07/2013 03:00:00 p.m.|7,76
 ITATI|06/07/2013 12:00:00 p.m.|7,76
 ITATI|06/07/2013 09:00:00 a.m.|7,78
@@ -1059,3 +1033,21 @@ ITATI|30/06/2013 12:00:00 a.m.|7,9
 ITATI|29/06/2013 09:00:00 p.m.|7,84
 ITATI|29/06/2013 06:00:00 p.m.|7,8
 }
+
+datos_alturas.split("\n").each do |altura|
+  nombre, fecha, dato_altura = altura.split("|")
+
+  puerto = Puerto.where(nombre: nombre).first
+  if puerto
+
+    if dato_altura
+      dato_altura = dato_altura.gsub(",", ".").to_f
+      fecha = DateTime.strptime(fecha, '%d/%m/%Y %I:%M:%S %p')
+      Altura.create(puerto_id: puerto.id,
+                    medicion: dato_altura,
+                    fecha: fecha)
+    end
+  end
+end
+
+
