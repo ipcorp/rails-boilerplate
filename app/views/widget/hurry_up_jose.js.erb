@@ -1,0 +1,123 @@
+(function() {
+
+// Localize jQuery variable
+var jQuery;
+var latitud;
+var longitud;
+
+var ciudadess=null;
+
+/******** Load jQuery if not present *********/
+if (window.jQuery === undefined || window.jQuery.fn.jquery !== '1.10.1') {
+    var script_tag = document.createElement('script');
+    script_tag.setAttribute("type","text/javascript");
+    script_tag.setAttribute("src",
+        "http://code.jquery.com/jquery-latest.min.js");
+    if (script_tag.readyState) {
+      script_tag.onreadystatechange = function () { // For old versions of IE
+          if (this.readyState == 'complete' || this.readyState == 'loaded') {
+              scriptLoadHandler();
+          }
+      };
+    } else { // Other browsers
+      script_tag.onload = scriptLoadHandler;
+    }
+    // Try to find the head, otherwise default to the documentElement
+    (document.getElementsByTagName("head")[0] || document.documentElement).appendChild(script_tag);
+
+} else {
+    // The jQuery version on the window is the one we want to use
+    jQuery = window.jQuery;
+    localizame();
+}
+
+/******** Called once jQuery has loaded ******/
+function scriptLoadHandler() {
+    // Restore $ and window.jQuery to their previous values and store the
+    // new jQuery in our local jQuery variable
+    jQuery = window.jQuery.noConflict(true);
+    // Call our localizame function
+    localizame(); 
+}
+
+/******** Our main function ********/
+function main() { 
+
+    jQuery(document).ready(function($) { 
+
+
+        /******* Load CSS *******/
+        var css_link = $("<link>", { 
+            rel: "stylesheet", 
+            type: "text/css", 
+            href: "/assets/widget.css" 
+        });
+        css_link.appendTo('head');   
+
+
+        // $.get("http://maps.googleapis.com/maps/api/geocode/json?latlng="+ latitud+"," + longitud+"&sensor=true");
+
+        $.get("http://maps.googleapis.com/maps/api/geocode/json?latlng="+ latitud+"," + longitud+"&sensor=true", function(data) {
+            
+            ciudadess = data;
+            // $div_titulo.append("<b>Puerto:</b> "+lista_ciudades(ciudadess)+"<br />");
+
+            $.get("/api/rios/alturas_por_ciudad",{ciudad:lista_ciudades(ciudadess)})
+                .done(
+                    function(datos) {
+                        var obj=datos;
+                        var $div = $("<div>", {id: "info_rio", class: "info_rio"});
+                        var $div_titulo = $("<div>", {id: "info_rio_titulo", class: "info_rio_titulo"});
+                        var $div_altura = $("<div>", {id: "info_rio_altura", class: "info_rio_altura"});
+                        $div_titulo.append("<b>Puerto:</b> "+obj.puerto.nombre+"<br />");
+                        $div_titulo.append("<b>Río:</b> "+obj.puerto.rio)
+                        $div_altura.append("<b>Alt. Alerta:</b> "+obj.puerto.altura_alerta+"<br />")
+                        $div_altura.append("<b>Alt. Evacuación:</b> "+obj.puerto.altura_evacuacion+"<br />")
+                        $div_altura.append("<b>coordenadas:</b> "+ latitud+"," + longitud)
+
+                        $div.append($div_titulo);
+                        $div.append($div_altura);
+
+                        $("#widget_hurry_up_jose").append($div);
+                        
+                    }
+                )
+                .fail(function() {
+                    var $div = $("<div>", {id: "info_rio", class: "info_rio"});
+                    $div.append("SIN DATOS");
+                    $("#widget_hurry_up_jose").append($div);
+                })
+
+        });
+
+
+    });
+
+}
+ 
+ function localizame() {
+    if (navigator.geolocation) { /* Si el navegador tiene geolocalizacion */
+        navigator.geolocation.getCurrentPosition(coordenadas);
+    }else{
+        alert('Oops! Tu navegador no soporta geolocalización. Bájate Chrome, que es gratis!');
+    }
+}
+
+function coordenadas(position) {
+    latitud = position.coords.latitude; /*Guardamos nuestra latitud*/
+    longitud = position.coords.longitude; /*Guardamos nuestra longitud*/
+
+    main();
+    //cargarMapa();
+}
+
+function lista_ciudades(ciudades){
+    var ci=[];
+    var lis="";
+    jQuery.each(ciudades.results, function(index,value){if( value.types.length > 0 && value.types[0] =="locality"){ci.push(value)}});
+    jQuery.each(ci,function(e,v){lis=lis+v.address_components[0].long_name;})
+    return lis;
+}
+
+
+})(); // We call our anonymous function immediately
