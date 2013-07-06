@@ -93,7 +93,7 @@ datos.split("\n").each do |linea|
   puerto.save
 end
 
-datos_alturas = %{
+datos_alturas = %w{
 CORRIENTES|06/07/2013 12:00:00 p.m.|7,18
 CORRIENTES|06/07/2013 09:00:00 a.m.|7,19
 CORRIENTES|06/07/2013 06:00:00 a.m.|7,22
