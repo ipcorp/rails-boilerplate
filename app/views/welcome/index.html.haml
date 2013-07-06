@@ -1,9 +1,35 @@
 .pull-right
   %strong
-    ULTIMA ACTUALIZACION: xx/xx/xx
-%BR
-%div{class: 'alert alert-block alert-success'}
-  En este momento todo esta tranquilo cerca de tu ubicación. Relajate.
+    ULTIMA ACTUALIZACION: 
+    = @altura.actualizacion
+%br
+- if @altura.todo_ok?
+  %div{class: 'alert alert-success'}
+    .span1
+      %i{class: 'icon-thumbs-up icon-3x'} 
+    En este momento todo esta tranquilo cerca de tu ubicación. 
+    %br
+    Relajate.
+
+- elsif @altura.alerta?
+  %div{class: 'alert alert-block'}
+    .span1
+      %i{class: 'icon-warning-sign icon-3x'} 
+    Estamos en un momento de alerta con
+    = @altura.diferencia_alerta
+    metros por encima del límite de alerta. 
+    %br
+    Estate atento a las crecientes del río.
+- elsif @altura.evacuacion?
+  %div{class: 'alert alert-error'}
+    .span1
+      %i{class: 'icon-warning-sign icon-3x'} 
+    Estamos en un momento crítico, con
+    = @altura.diferencia_evacuacion 
+    metros por encima del limite de evacuación.
+    %br
+    Apúrate José que se esta viniendo la creciente otra vez!.
+
 
 %h5
   Detalle
@@ -11,22 +37,22 @@
 %table{class: 'table'}
   %tr
     %td Río
-    %td
+    %td= @rio.nombre
   %tr
     %td Puerto
-    %td
+    %td= @puerto.nombre
   %tr
     %td Altura actual
-    %td
+    %td= @altura.medicion
   %tr
     %td Altura Anterior
     %td
   %tr{class: 'alert'}
     %td Medida Alerta
-    %td
+    %td= @puerto.altura_alerta
   %tr{class: 'alert-error'}
     %td Medida Evacuación
-    %td
+    %td= @puerto.altura_evacuacion
 
 
 %h5 Históricos
