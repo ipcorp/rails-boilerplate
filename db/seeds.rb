@@ -92,3 +92,6 @@ datos.split("\n").each do |linea|
   puerto.rio_id = rio.id
   puerto.save
 end
+
+Puerto.find(13).update_attributes(altura_alerta: 6.50, altura_evacuacion: 7)
+Altura.create(puerto_id: 13, medicion: 7.18, fecha: DateTime.now)
