@@ -4,6 +4,7 @@ gem 'rails', '3.2.12'
 gem 'pg'
 gem 'jquery-rails'
 gem 'haml'
+gem 'mechanize'
 
 group :assets do
   gem 'therubyracer'
