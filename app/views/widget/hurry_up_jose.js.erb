@@ -70,10 +70,10 @@ function main() {
                         var $div_titulo = $("<div>", {id: "info_rio_titulo", class: "info_rio_titulo"});
                         var $div_altura = $("<div>", {id: "info_rio_altura", class: "info_rio_altura"});
                         $div_titulo.append("<b>Puerto:</b> "+obj.puerto.nombre+"<br />");
-                        $div_titulo.append("<b>Río:</b> "+obj.puerto.rio)
-                        $div_altura.append("<b>Alt. Alerta:</b> "+obj.puerto.altura_alerta+"<br />")
-                        $div_altura.append("<b>Alt. Evacuación:</b> "+obj.puerto.altura_evacuacion+"<br />")
-                        $div_altura.append("<b>coordenadas:</b> "+ latitud+"," + longitud)
+                        $div_titulo.append("<b>Río:</b> "+obj.puerto.rio_nombre);
+                        $div_altura.append("<b>Alt. Alerta:</b> "+obj.puerto.altura_alerta+"<br />");
+                        $div_altura.append("<b>Alt. Evacuación:</b> "+obj.puerto.altura_evacuacion+"<br />");
+                        // $div_altura.append("<b>coordenadas:</b> "+ latitud+"," + longitud)
 
                         $div.append($div_titulo);
                         $div.append($div_altura);
