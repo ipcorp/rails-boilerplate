@@ -4,6 +4,7 @@ gem 'rails', '3.2.12'
 gem 'pg'
 gem 'jquery-rails'
 gem 'haml'
+gem 'mechanize'
 
 group :assets do
   gem 'therubyracer'
@@ -12,6 +13,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
   gem 'twitter-bootstrap-rails'
+  gem 'flatui-rails'
 end
 
 group :development do
