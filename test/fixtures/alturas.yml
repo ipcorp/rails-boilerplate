@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  puerto_id: 1
+  medicion: 1.5
+  fecha: 2013-07-06 12:15:50
+
+two:
+  puerto_id: 1
+  medicion: 1.5
+  fecha: 2013-07-06 12:15:50
