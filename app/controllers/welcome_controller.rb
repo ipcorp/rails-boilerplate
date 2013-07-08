@@ -1,8 +1,10 @@
 class WelcomeController < ApplicationController
   def index
 
-  	@puerto = Puerto.where("nombre ilike ?", request.subdomain).first
-
+    @puerto = Puerto.where("nombre ilike ?", params[:puerto]).first
+  	if @puerto.blank?
+      @puerto = Puerto.where("nombre ilike ?", request.subdomain).first
+    end
     if @puerto
       @rio    = @puerto.rio
       @altura = @puerto.ultima_altura
