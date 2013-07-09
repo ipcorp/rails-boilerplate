@@ -1,10 +1,8 @@
 class WelcomeController < ApplicationController
-  def index
 
-    @puerto = Puerto.where("nombre ilike ?", params[:puerto]).first
-  	if @puerto.blank?
-      @puerto = Puerto.where("nombre ilike ?", request.subdomain).first
-    end
+  def index
+    nombre_puerto = request.subdomain || params[:puerto] || 'Corrientes'
+    @puerto = Puerto.where("nombre ilike ?", nombre_puerto).first
 
     if @puerto
       @rio    = @puerto.rio
@@ -13,9 +11,7 @@ class WelcomeController < ApplicationController
     else
       render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found
     end
-
   end
-
 
   def prueba_widget
     respond_to do |format|
