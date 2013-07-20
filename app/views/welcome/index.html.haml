@@ -5,35 +5,16 @@
       = @altura.actualizacion
   %br
   - if @altura.todo_ok?
-    %div{class: 'alert alert-success'}
-      .span1.alert-icon
-        %i{class: 'icon-thumbs-up icon-3x'} 
-      %h2
-        En este momento todo esta tranquilo cerca de tu ubicación. 
-        %br
-        Relajate.
+    = render partial: 'alerta', locals: {css_class: 'alert alert-success', icon_class: 'icon-thumbs-up icon-2x', texto: "En este momento todo esta tranquilo cerca de tu ubicación", lead: 'Relájate'}
+    
 
   - elsif @altura.alerta?
-    %div{class: 'alert alert-block'}
-      .span1.alert-icon
-        %i{class: 'icon-warning-sign icon-3x'}
-
-      %h2
-        Estamos en un momento de alerta con
-        = @altura.diferencia_alerta
-        metros por encima del límite de alerta.
-        %br
-        Estate atento a las crecientes del río.
+    = render partial: 'alerta', locals: {css_class: 'alert alert-block', icon_class: 'icon-warning-sign icon-2x', texto: "Estate alerta, tenemos #{@altura.diferencia_alerta} metros por encima del limite de alerta."}
+    
   - elsif @altura.evacuacion?
-    %div{class: 'alert alert-error'}
-      .span1.alert-icon
-        %i{class: 'icon-warning-sign icon-3x'}
-      %h2
-        Estamos en un momento crítico, con
-        = @altura.diferencia_evacuacion
-        metros por encima del limite de evacuación.
-        %br
-        Apúrate José que se esta viniendo la creciente otra vez!.
+    = render partial: 'alerta', locals: {css_class: 'alert alert-error', icon_class: 'icon-warning-sign icon-2x', texto: "Estamos #{@altura.diferencia_evacuacion} metros por encima del limite de evacuación."}
+
+    
 
 
   %h3

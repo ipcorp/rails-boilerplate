@@ -1,7 +1,7 @@
 class WelcomeController < ApplicationController
 
   def index
-    nombre_puerto = request.subdomain || params[:puerto] || 'Corrientes'
+    nombre_puerto = params[:puerto] || 'Corrientes'
     @puerto = Puerto.where("nombre ilike ?", nombre_puerto).first
 
     if @puerto
